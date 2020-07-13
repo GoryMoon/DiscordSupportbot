@@ -1,0 +1,30 @@
+{
+  "name": "supportbot",
+  "version": "1.0.0",
+  "description": "Emotional support bot",
+  "main": "index.js",
+  "author": "GoryMoon",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch . --watch commands -e js index.js",
+    "debug": "node index.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^7.1.0",
+    "chalk": "^4.1.0",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "enmap": "^5.3.1",
+    "lodash.includes": "^4.3.0",
+    "lodash.pull": "^4.1.0",
+    "lodash.pullat": "^4.6.0",
+    "lodash.sample": "^4.2.1",
+    "moment": "^2.27.0",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
