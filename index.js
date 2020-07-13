@@ -53,7 +53,8 @@ const defaultSettings = {
     prefix: ".",
     messages: [],
     channels: [],
-    configChannel: 0
+    configChannel: 0,
+    lastMessage: ""
 }
 
 const client = new Client();
@@ -133,7 +134,13 @@ client.on('message', msg => {
 
     // Any other message in channel
     if (_includes(guildConf.channels, msg.channel.id) && guildConf.messages.length > 0) {
-        msg.channel.send(_sample(guildConf.messages));
+        let m = "";
+        do {
+            m = _sample(guildConf.messages);
+        } while(guildConf.lastMessage == m && guildConf.messages > 1)
+        client.settings.set(msg.guild.id, m, "lastMessage")
+
+        msg.channel.send(m);
     }
     
 });

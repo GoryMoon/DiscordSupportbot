@@ -12,5 +12,5 @@ export function execute(message, args) {
 
     messages.push(args.join(' '));
     client.settings.set(message.guild.id, messages, "messages");
-    message.channel.send(`Added message '${args.join(' ')}'`);
+    message.channel.send(`Added message \`${args.join(' ')}\``);
 }
