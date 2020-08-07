@@ -28,7 +28,10 @@ export function execute(message, args) {
         });
     }
     
-    work.then(function(smessage) { 
+    work.then(function(smessage) {
+        if (smessage == null) {
+            return;
+        }
         smessage.messages.push(msg)
 
         client.settings.set(message.guild.id, specialMessages, "specialMessages");
@@ -36,12 +39,12 @@ export function execute(message, args) {
     });
 }
 
-function addWord(message, word, role, messages) {
-    return findRole(message.guild.roles, role)
+function addWord(message, word, roleName, messages) {
+    return findRole(message.guild.roles, roleName)
         .then(role => {
             if (!role) {
-                message.reply(`Could not find role with name: ${role}`);
-                return undefined;
+                message.reply(`Could not find role with name: **${roleName}**`);
+                return null;
             }
             
             let msg = {

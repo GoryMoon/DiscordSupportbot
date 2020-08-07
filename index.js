@@ -97,6 +97,8 @@ client.on('guildDelete', (guild) => {
     client.settings.delete(guild.id)
 });
 
+// Argument parser
+const argRegex = new RegExp('"[^"]+"|[\\S]+', 'g');
 
 // Message event
 client.on('message', msg => {
@@ -113,7 +115,15 @@ client.on('message', msg => {
     if ((msg.channel.id === guildConf.configChannel || guildConf.configChannel === 0) && msg.content.indexOf(guildConf.prefix) === 0) {
         if (!msg.member.permissions.any(Permissions.FLAGS.ADMINISTRATOR)) return;
 
-        const args = msg.content.slice(guildConf.prefix.length).split(/\s+/g);
+        const args = [];
+        msg.content
+            .slice(guildConf.prefix.length)
+            .match(argRegex)
+            .forEach(element => {
+                if (!element) return;
+                return args.push(element.replace(/"/g, ''));
+            });
+
         const commandName = args.shift().toLowerCase();
 
         const command = client.commands.get(commandName)
