@@ -3,7 +3,7 @@ import { safeToLowerCase, findRole } from '../util.js';
 export const name = 'add_special_message';
 export const description = 'Adds a special message that can show when the bot responds to a role with a keyword in a channel.';
 export const args = 3;
-export const usage = '<word> <role> <message>';
+export const usage = '<word> <role name> <message>';
 export const aliases = ['asm']
 export function execute(message, args) {
     const { client } = message;

@@ -4,7 +4,7 @@ import { safeToLowerCase } from '../util.js';
 export const name = 'remove_special_message';
 export const description = 'Removes a message from the list of possible repsones for the special word, use the list command to get the id';
 export const args = 3;
-export const usage = '<word> <role> <message_id>';
+export const usage = '<word> <role name> <message_id>';
 export const aliases = ['rsm', 'dsm', 'delete_message_special']
 export function execute(message, args) {
     const { client } = message;
