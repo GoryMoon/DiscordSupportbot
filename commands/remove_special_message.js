@@ -1,7 +1,7 @@
 import _pullAt from 'lodash.pullat'
 import { safeToLowerCase } from '../util.js';
 
-export const name = 'remove_message_special';
+export const name = 'remove_special_message';
 export const description = 'Removes a message from the list of possible repsones for the special word, use the list command to get the id';
 export const args = 3;
 export const usage = '<word> <role> <message_id>';
