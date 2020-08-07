@@ -56,7 +56,8 @@ const defaultSettings = {
     messages: [],
     channels: [],
     configChannel: 0,
-    lastMessages: []
+    lastMessages: [],
+    specialMessages: [],
 }
 
 const client = new Client();
@@ -103,6 +104,11 @@ client.on('message', msg => {
 
     const guildConf = client.settings.ensure(msg.guild.id, defaultSettings);
 
+    if (guildConf.specialMessages == undefined) {
+        guildConf.specialMessages = [];
+        client.settings.set(msg.guild.id, guildConf.specialMessages, "specialMessages");
+    }
+
     // Commands channel
     if ((msg.channel.id === guildConf.configChannel || guildConf.configChannel === 0) && msg.content.indexOf(guildConf.prefix) === 0) {
         if (!msg.member.permissions.any(Permissions.FLAGS.ADMINISTRATOR)) return;
@@ -136,20 +142,40 @@ client.on('message', msg => {
 
     // Any other message in channel
     if (_includes(guildConf.channels, msg.channel.id) && guildConf.messages.length > 0) {
-        let num = -1;
-        do {
-            num = _random(guildConf.messages.length - 1);
-        } while(_indexOf(guildConf.lastMessages, num) != -1 && guildConf.messages.length > 1)
-        
-        if (guildConf.lastMessages == undefined) {
-            guildConf.lastMessages = [];
+        let message = checkSpecial(guildConf, msg);
+        if (message === null) {
+            let num = -1;
+            do {
+                num = _random(guildConf.messages.length - 1);
+            } while(_indexOf(guildConf.lastMessages, num) != -1 && guildConf.messages.length > 1)
+            
+            if (guildConf.lastMessages == undefined) {
+                guildConf.lastMessages = [];
+            }
+            guildConf.lastMessages.push(num);
+            client.settings.set(msg.guild.id, _takeRight(guildConf.lastMessages, Math.ceil(guildConf.messages.length * 0.3)), "lastMessages")
+            message = guildConf.messages[num];
         }
-        guildConf.lastMessages.push(num);
-        client.settings.set(msg.guild.id, _takeRight(guildConf.lastMessages, Math.ceil(guildConf.messages.length * 0.3)), "lastMessages")
-
-        msg.channel.send(guildConf.messages[num]);
+        msg.channel.send(message);
     }
     
 });
+
+function checkSpecial(conf, msg) {
+    let messagePool = [];
+    for (let i = 0; i < conf.specialMessages.length; i++) {
+        const message = conf.specialMessages[i];
+        if(msg.content.toLowerCase().indexOf(message.word) !== -1) {
+            if (msg.member.roles.cache.some(r => r.name === message.role)) {
+                messagePool = messagePool.concat(message.messages)   
+            }
+        }
+    }
+    if (messagePool.length > 0) {
+        let num = _random(messagePool.length - 1);
+        return messagePool[num];
+    }
+    return null;
+}
 
 client.login(process.env.TOKEN);

@@ -17,6 +17,7 @@
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "enmap": "^5.3.1",
+    "lodash.find": "^4.6.0",
     "lodash.includes": "^4.3.0",
     "lodash.indexof": "^4.0.5",
     "lodash.pull": "^4.1.0",

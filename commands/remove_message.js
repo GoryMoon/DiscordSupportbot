@@ -1,4 +1,3 @@
-import { getChannelFromMention } from '../util.js'
 import _pullAt from 'lodash.pullat'
 
 export const name = 'remove_message';

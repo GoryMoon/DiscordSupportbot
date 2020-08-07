@@ -1,5 +1,3 @@
-import { getChannelFromMention } from '../util.js'
-
 export const name = 'add_message';
 export const description = 'Adds a message that can show when the bot responds in a channel.';
 export const args = 1;
