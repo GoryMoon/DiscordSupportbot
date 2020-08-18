@@ -17,6 +17,7 @@ export function safeToLowerCase(s) {
 export function findRole(roles, name) {
 	return roles.fetch()
         .then(roles => {
-            return _find(roles.cache.array(), ['name', name])
+			var not = name.startsWith('!');
+            return (not ? '!' : '') + _find(roles.cache.array(), ['name', not ? name.substring(1): name])
 		});
 }

@@ -176,7 +176,10 @@ function checkSpecial(conf, msg) {
     for (let i = 0; i < conf.specialMessages.length; i++) {
         const message = conf.specialMessages[i];
         if(msg.content.toLowerCase().indexOf(message.word) !== -1) {
-            if (msg.member.roles.cache.some(r => r.name === message.role)) {
+            var not = message.role.startsWith('!');
+            var role = message.role.substring(1);
+            var hasRole = msg.member.roles.cache.some(r => r.name === role);
+            if (not ? !hasRole: hasRole) {
                 messagePool = messagePool.concat(message.messages)   
             }
         }
