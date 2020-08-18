@@ -18,6 +18,10 @@ export function findRole(roles, name) {
 	return roles.fetch()
         .then(roles => {
 			var not = name.startsWith('!');
-            return (not ? '!' : '') + _find(roles.cache.array(), ['name', not ? name.substring(1): name])
+			var role = _find(roles.cache.array(), ['name', not ? name.substring(1): name]);
+			if (role !== undefined && not) {
+				role.name = '!' + role.name;
+			}
+            return role;
 		});
 }
