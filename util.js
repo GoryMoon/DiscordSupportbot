@@ -1,13 +1,14 @@
 import _find from 'lodash.find';
 
 export function getChannelFromMention(client, mention) {
-	if (!mention) return;
+	if (!mention) return null;
 
 	if (mention.startsWith('<#') && mention.endsWith('>')) {
 		mention = mention.slice(2, -1);
 
 		return client.channels.cache.get(mention);
 	}
+	return null;
 }
 
 export function safeToLowerCase(s) {

@@ -139,14 +139,14 @@ better-sqlite3@^7.1.0:
     prebuild-install "^5.3.3"
     tar "4.4.10"
 
-better-sqlite3@^7.1.2:
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-7.1.2.tgz#95565757a834093f1ecae0d4457f60820ed5dd2a"
-  integrity sha512-8FWYnJ6Bx94MBX03J5Ka7sTRlvXXMEm4FW2Op7nM8ErQZeyALYLmSlbMBnfr4cMpS0tj0aYZv0a+26G2YJuIjg==
+better-sqlite3@^7.1.5:
+  version "7.1.5"
+  resolved "https://registry.yarnpkg.com/better-sqlite3/-/better-sqlite3-7.1.5.tgz#3eb0fcc81bed463ddf2da4a02aad7e02726205c0"
+  integrity sha512-HX5dN0zLllJLQOJP2tXqV42bvjXPnbe/Nl5o6nD1jj99h0148B39zbfGZVoJBLtDAd/CJc4Zdm8K+GhHIq84IQ==
   dependencies:
     bindings "^1.5.0"
-    prebuild-install "^5.3.3"
-    tar "^6.0.5"
+    prebuild-install "^6.0.1"
+    tar "^6.1.0"
 
 binary-extensions@^2.0.0:
   version "2.1.0"
@@ -432,19 +432,19 @@ detect-libc@^1.0.3:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
-discord.js@^12.5.1:
-  version "12.5.1"
-  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.1.tgz#992b45753e3815526a279914ccc281d3496f5990"
-  integrity sha512-VwZkVaUAIOB9mKdca0I5MefPMTQJTNg0qdgi1huF3iwsFwJ0L5s/Y69AQe+iPmjuV6j9rtKoG0Ta0n9vgEIL6w==
+discord.js@^12.5.3:
+  version "12.5.3"
+  resolved "https://registry.yarnpkg.com/discord.js/-/discord.js-12.5.3.tgz#56820d473c24320871df9ea0bbc6b462f21cf85c"
+  integrity sha512-D3nkOa/pCkNyn6jLZnAiJApw2N9XrIsXUAdThf01i7yrEuqUmDGc7/CexVWwEcgbQR97XQ+mcnqJpmJ/92B4Aw==
   dependencies:
     "@discordjs/collection" "^0.1.6"
     "@discordjs/form-data" "^3.0.1"
     abort-controller "^3.0.0"
     node-fetch "^2.6.1"
-    prism-media "^1.2.2"
+    prism-media "^1.2.9"
     setimmediate "^1.0.5"
     tweetnacl "^1.0.3"
-    ws "^7.3.1"
+    ws "^7.4.4"
 
 dot-prop@^5.2.0:
   version "5.2.0"
@@ -485,10 +485,10 @@ end-of-stream@^1.1.0, end-of-stream@^1.4.1:
   dependencies:
     once "^1.4.0"
 
-enmap@^5.8.2:
-  version "5.8.2"
-  resolved "https://registry.yarnpkg.com/enmap/-/enmap-5.8.2.tgz#dcb1c76247fa63317f1c070513c8ccec68226d6f"
-  integrity sha512-VduS/dZCOy3lGPrAaBzt/E3un8OJtRgqsF7grbWrOk4Ay2aU8BXqaO6ISngBgvnxa8y+8zhQs25r76Vl6acKuA==
+enmap@^5.8.4:
+  version "5.8.4"
+  resolved "https://registry.yarnpkg.com/enmap/-/enmap-5.8.4.tgz#1e007be1d9930f43d03e7306c2e2b3b49e35bd3a"
+  integrity sha512-36zXOIJrAvL6Dk03vz9PA4anpIkms3kelJhG+X1hw5HYlRv8yT6UEMvDH1yUaMYfsH4v3D04nLoBX4z2Vqambw==
   dependencies:
     better-sqlite3 "^7.1.0"
     lodash "^4.17.20"
@@ -805,11 +805,6 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
-lodash.clonedeep@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
-  integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
-
 lodash.find@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.find/-/lodash.find-4.6.0.tgz#cb0704d47ab71789ffa0de8b97dd926fb88b13b1"
@@ -942,7 +937,7 @@ minizlib@^2.1.1:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
-mkdirp-classic@^0.5.2:
+mkdirp-classic@^0.5.2, mkdirp-classic@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
   integrity sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==
@@ -978,6 +973,13 @@ napi-build-utils@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/napi-build-utils/-/napi-build-utils-1.0.2.tgz#b1fddc0b2c46e380a0b7a76f984dd47c41a13806"
   integrity sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==
+
+node-abi@^2.21.0:
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.21.0.tgz#c2dc9ebad6f4f53d6ea9b531e7b8faad81041d48"
+  integrity sha512-smhrivuPqEM3H5LmnY3KU6HfYv0u4QklgAxfFyRNujKUzbUcYZ+Jc2EhukB9SRcD2VpqhxM7n/MIcp1Ua1/JMg==
+  dependencies:
+    semver "^5.4.1"
 
 node-abi@^2.7.0:
   version "2.18.0"
@@ -1109,15 +1111,35 @@ prebuild-install@^5.3.3:
     tunnel-agent "^0.6.0"
     which-pm-runs "^1.0.0"
 
+prebuild-install@^6.0.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-6.1.1.tgz#6754fa6c0d55eced7f9e14408ff9e4cba6f097b4"
+  integrity sha512-M+cKwofFlHa5VpTWub7GLg5RLcunYIcLqtY5pKcls/u7xaAb8FrXZ520qY8rkpYy5xw90tYCyMO0MP5ggzR3Sw==
+  dependencies:
+    detect-libc "^1.0.3"
+    expand-template "^2.0.3"
+    github-from-package "0.0.0"
+    minimist "^1.2.3"
+    mkdirp-classic "^0.5.3"
+    napi-build-utils "^1.0.1"
+    node-abi "^2.21.0"
+    noop-logger "^0.1.1"
+    npmlog "^4.0.1"
+    pump "^3.0.0"
+    rc "^1.2.7"
+    simple-get "^3.0.3"
+    tar-fs "^2.0.0"
+    tunnel-agent "^0.6.0"
+
 prepend-http@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prism-media@^1.2.2:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-1.2.3.tgz#37bbb11726674a73fe56a2df4de76aa91d2141b7"
-  integrity sha512-fSrR66n0l6roW9Rx4rSLMyTPTjRTiXy5RVqDOurACQ6si1rKHHKDU5gwBJoCsIV0R3o9gi+K50akl/qyw1C74A==
+prism-media@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/prism-media/-/prism-media-1.2.9.tgz#8d4f97b36efdfc82483eb8d3db64020767866f36"
+  integrity sha512-UHCYuqHipbTR1ZsXr5eg4JUmHER8Ss4YEb9Azn+9zzJ7/jlTtD1h0lc4g6tNx3eMlB8Mp6bfll0LPMAV4R6r3Q==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -1416,7 +1438,7 @@ tar@4.4.10:
     safe-buffer "^5.1.2"
     yallist "^3.0.3"
 
-tar@^6.0.5:
+tar@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.0.tgz#d1724e9bcc04b977b18d5c573b333a2207229a83"
   integrity sha512-DUCttfhsnLCjwoDoFcI+B2iJgYa93vBnDUATYEeRx6sntCTdN01VnqsIuTlALXla/LWooNg0yEGeB+Y8WdFxGA==
@@ -1588,10 +1610,10 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^7.3.1:
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.2.tgz#782100048e54eb36fe9843363ab1c68672b261dd"
-  integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
+ws@^7.4.4:
+  version "7.4.4"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.4.tgz#383bc9742cb202292c9077ceab6f6047b17f2d59"
+  integrity sha512-Qm8k8ojNQIMx7S+Zp8u/uHOx7Qazv3Yv4q68MiWWWOJhiwG5W3x7iqmRtJo8xxrciZUY4vRxUTJCKuRnF28ZZw==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
