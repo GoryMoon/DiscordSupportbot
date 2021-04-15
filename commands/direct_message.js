@@ -15,7 +15,8 @@ export function execute(message, args) {
     }
 
     const channels = client.settings.get(message.guild.id, "channels");
-    if (!_includes(channels, channel.id)) {
+    const configChannel = client.settings.get(message.guild.id, "configChannel");
+    if (!_includes(channels, channel.id) && channel.id !== configChannel) {
         return message.reply(`Can only send messages to channels that I can react in, add a channel with the \`add_channel\` command.`);
     }
 
