@@ -19,5 +19,5 @@ export function execute(message, args) {
 
     let m = _pullAt(messages, i);
     client.settings.set(message.guild.id, messages, 'messages');
-    message.channel.send(`Removed message:\n> ${m}`);
+    return message.channel.send(`Removed message:\n> ${m}`);
 }

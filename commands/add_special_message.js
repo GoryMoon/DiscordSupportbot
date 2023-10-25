@@ -5,7 +5,7 @@ export const description = 'Adds a special message that can show when the bot re
 export const args = 3;
 export const usage = '<word> <role name> <message>';
 export const aliases = ['asm']
-export function execute(message, args) {
+export async function execute(message, args) {
     const { client } = message;
 
     let specialMessages = client.settings.get(message.guild.id, "specialMessages")
@@ -13,48 +13,44 @@ export function execute(message, args) {
     const role = args[1];
     const msg = args.slice(2).join(' ');
 
-    let work = null;
+    let smessage = null;
     if (specialMessages === undefined) {
-        work = addWord(message, word, role)
+        smessage = await addWord(message, word, role)
     } else {
-        work = new Promise(function(resolve, reject) {
-            for (let i = 0; i < specialMessages.length; i++) {
-                const smessage = specialMessages[i];
-                if (smessage.word == word && smessage.role == role) {
-                    return resolve(smessage);
-                }
+        for (let i = 0; i < specialMessages.length; i++) {
+            const msg = specialMessages[i];
+            if (msg.word == word && msg.role == role) {
+                smessage = msg;
             }
-            addWord(message, word, role, specialMessages).then(resolve)
-        });
+        }
+        if (smessage == null)
+            smessage = await addWord(message, word, role, specialMessages);
     }
     
-    work.then(function(smessage) {
-        if (smessage == null) {
-            return;
-        }
-        smessage.messages.push(msg)
+    if (smessage == null) {
+        return;
+    }
+    smessage.messages.push(msg)
 
-        client.settings.set(message.guild.id, specialMessages, "specialMessages");
-        return message.channel.send(`Added special message:\n> \`${word}\` -> **${role}**: ${msg}`);
-    });
+    client.settings.set(message.guild.id, specialMessages, "specialMessages");
+    await message.channel.send(`Added special message:\n> \`${word}\` -> **${role}**: ${msg}`);
 }
 
-function addWord(message, word, roleName, messages) {
-    return findRole(message.guild.roles, roleName)
-        .then(role => {
-            if (!role) {
-                message.reply(`Could not find role with name: **${roleName}**`);
-                return null;
-            }
-            
-            let msg = {
-                word,
-                role: role.name,
-                messages: []
-            };
-            messages.push(msg)
+async function addWord(message, word, roleName, messages) {
+    const role = await findRole(message.guild.roles, roleName)
+    
+    if (!role) {
+        message.reply(`Could not find role with name: **${roleName}**`);
+        return null;
+    }
+    
+    let msg = {
+        word,
+        role: role.name,
+        messages: []
+    };
+    messages.push(msg)
 
-            message.client.settings.set(message.guild.id, messages, "specialMessages");
-            return msg;
-        });
+    message.client.settings.set(message.guild.id, messages, "specialMessages");
+    return msg;
 }

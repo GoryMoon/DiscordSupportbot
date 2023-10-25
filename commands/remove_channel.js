@@ -20,5 +20,5 @@ export function execute(message, args) {
 
     _pull(channels, channel.id);
     client.settings.set(message.guild.id, channels, "channels");
-    message.reply(`Removed channel: ${channel}`);
+    return message.reply(`Removed channel: ${channel}`);
 }

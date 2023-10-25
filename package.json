@@ -1,6 +1,6 @@
 {
   "name": "supportbot",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Emotional support bot",
   "main": "index.js",
   "author": "GoryMoon",
@@ -12,11 +12,12 @@
     "debug": "node index.js"
   },
   "dependencies": {
-    "better-sqlite3": "^7.1.5",
-    "chalk": "^4.1.0",
-    "discord.js": "^12.5.3",
-    "dotenv": "^8.2.0",
-    "enmap": "^5.8.4",
+    "better-sqlite3": "^9.0.0",
+    "bufferutil": "^4.0.8",
+    "chalk": "^5.3.0",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "enmap": "^5.9.8",
     "lodash.find": "^4.6.0",
     "lodash.includes": "^4.3.0",
     "lodash.indexof": "^4.0.5",
@@ -25,9 +26,12 @@
     "lodash.random": "^3.2.0",
     "lodash.takeright": "^4.1.1",
     "moment": "^2.29.4",
-    "winston": "^3.3.3"
+    "utf-8-validate": "^6.0.3",
+    "winston": "^3.11.0",
+    "zlib-sync": "^0.1.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "eslint": "^8.52.0",
+    "nodemon": "^3.0.1"
   }
 }

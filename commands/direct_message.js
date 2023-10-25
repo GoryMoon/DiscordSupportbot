@@ -22,5 +22,5 @@ export function execute(message, args) {
 
     const msg = args.slice(1).join(' ');
     channel.send(msg);
-    message.channel.send(`Posted in: ${channel}\n > ${msg}`);
+    return message.channel.send(`Posted in: ${channel}\n > ${msg}`);
 }
