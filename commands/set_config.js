@@ -15,6 +15,6 @@ export function execute(message, args) {
     if (!args[0]) {
         return message.reply("Cleared bot configure channel");
     }
-    message.reply(`Bot configure channel set to ${channel}`);
+    return message.reply(`Bot configure channel set to ${channel}`);
 }
 

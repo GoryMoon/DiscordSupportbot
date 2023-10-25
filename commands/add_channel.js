@@ -19,5 +19,5 @@ export function execute(message, args) {
 
     channels.push(channel.id);
     client.settings.set(message.guild.id, channels, "channels");
-    message.reply(`Added channel: ${channel}`);
+    return message.reply(`Added channel: ${channel}`);
 }

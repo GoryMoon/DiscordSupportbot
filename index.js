@@ -1,7 +1,7 @@
 import 'dotenv/config.js';
 
 import fs from 'fs'
-import { Client, Collection, Permissions } from 'discord.js';
+import { Client, Events, Collection, GatewayIntentBits, PermissionsBitField } from 'discord.js';
 import Enmap from 'enmap';
 import _includes from 'lodash.includes'
 import _random from 'lodash.random'
@@ -60,7 +60,11 @@ const defaultSettings = {
     specialMessages: [],
 }
 
-const client = new Client();
+const client = new Client({ intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent
+]});
 client.commands = new Collection();
 client.settings = new Enmap({
     name: "settings",
@@ -85,14 +89,14 @@ Promise.all(promises).then(() => {
 });
 
 // Logging events
-client.on('ready', () => logger.info(`Logged in as ${client.user.tag}!`));
-client.on('debug', m => logger.debug(m));
-client.on('warn', m => logger.warn(m));
-client.on('error', m => logger.error(m));
-client.on('shardReconnecting', (id) => logger.info(`Shard with ID ${id} reconnected.`));
+client.once(Events.ClientReady, c => logger.info(`Logged in as ${c.user.tag}!`));
+client.on(Events.Debug, m => logger.debug(m));
+client.on(Events.Warn, m => logger.warn(m));
+client.on(Events.Error, m => logger.error(m));
+client.on(Events.ShardReconnecting, (id) => logger.info(`Shard with ID ${id} reconnected.`));
 
-client.on('guildCreate', (guild) => logger.info(`Joined guild ${guild}`));
-client.on('guildDelete', (guild) => {
+client.on(Events.GuildCreate, (guild) => logger.info(`Joined guild ${guild}`));
+client.on(Events.GuildDelete, (guild) => {
     logger.info(`Left guild ${guild}`)
     client.settings.delete(guild.id)
 });
@@ -101,7 +105,7 @@ client.on('guildDelete', (guild) => {
 const argRegex = new RegExp('"[^"]+"|[\\S]+', 'g');
 
 // Message event
-client.on('message', msg => {
+client.on(Events.MessageCreate, async msg => {
     if (!msg.guild || msg.author.bot) return;
 
     const guildConf = client.settings.ensure(msg.guild.id, defaultSettings);
@@ -113,7 +117,8 @@ client.on('message', msg => {
 
     // Commands channel
     if ((msg.channel.id === guildConf.configChannel || guildConf.configChannel === 0) && msg.content.indexOf(guildConf.prefix) === 0) {
-        if (!msg.member.permissions.any(Permissions.FLAGS.ADMINISTRATOR)) return;
+        if (!msg.member.permissions.any(PermissionsBitField.Flags.Administrator)) return;
+        await msg.channel.sendTyping();
 
         const args = [];
         msg.content
@@ -132,17 +137,17 @@ client.on('message', msg => {
         if (!command) return;
 
         if (command.args && command.args > args.length) {
-            let reply = `You didn't provide any arguments, ${msg.author}!`;
+            let reply = `You didn't provide any arguments!`;
 
             if (command.usage) {
                 reply += `\nThe proper usage would be: \`${guildConf.prefix}${command.name} ${command.usage}\``;
             }
 
-            return msg.channel.send(reply);
+            return await msg.reply(reply);
         }
 
         try {
-            command.execute(msg, args, logger);
+            await command.execute(msg, args, logger);
         } catch (error) {
             logger.error("Error executing command", error)
             msg.reply("There was an error trying to execute that command!");
@@ -166,7 +171,7 @@ client.on('message', msg => {
             client.settings.set(msg.guild.id, _takeRight(guildConf.lastMessages, Math.ceil(guildConf.messages.length * 0.3)), "lastMessages")
             message = guildConf.messages[num];
         }
-        msg.channel.send(message);
+        await msg.channel.send(message);
     }
     
 });

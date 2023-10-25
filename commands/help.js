@@ -10,11 +10,11 @@ export function execute(message, args) {
         data.push('Here\'s a list of all commands:');
         data.push(`${commands.map(command => `> ${command.name} ${command.aliases ? `(${command.aliases.join(', ')})`: ''}`).join('\n')}`);
         data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
-        return message.channel.send(data, { split: true });
+        return message.channel.send({ content: data.join('\n') });
     }
 
     const name = args[0].toLowerCase();
-    const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));;
+    const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
     if (!command) {
         return message.reply('That\'s not a valid command!');
@@ -23,5 +23,6 @@ export function execute(message, args) {
     if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
     if (command.description) data.push(`**Description:** ${command.description}`);
     if (command.usage) data.push(`**Usage:** ${prefix}${command.name} ${command.usage}`);
-    message.channel.send(data, { split: true });
+    
+    return message.channel.send({ content: data.join('\n') });
 }

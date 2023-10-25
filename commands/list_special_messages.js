@@ -4,7 +4,7 @@ export const name = 'list_special_messages';
 export const description = 'List all messages that can be used as respones for a special word';
 export const usage = '[word]';
 export const aliases = ['lsm']
-export function execute(message, args, _logger) {
+export function execute(message, args) {
     const { client } = message;
     
     let specialMessages = client.settings.get(message.guild.id, "specialMessages")
@@ -22,7 +22,7 @@ export function execute(message, args, _logger) {
             found = true;
 
             let header = `\`${msg.word}\` -> **${msg.role}**:\n`
-            if (!msg.messages.length) {
+            if (!msg.messages.length) { 
                 messageToSend.push(`${header}> No messages stored.`);
                 continue;
             }
@@ -32,8 +32,7 @@ export function execute(message, args, _logger) {
         }
     }
     if (found) {
-        message.channel.send(messageToSend.join('\n'), { split: true })
-        return;
+        return message.channel.send(messageToSend.join('\n'), { split: true })
     }
 
     if (word !== undefined) {
