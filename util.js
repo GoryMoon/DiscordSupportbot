@@ -1,3 +1,7 @@
+import _indexOf from 'lodash.indexof'
+import _random from 'lodash.random'
+import _takeRight from 'lodash.takeright'
+
 export function getChannelFromMention(client, mention) {
 	if (!mention) return null;
 
@@ -23,4 +27,21 @@ export async function findRole(rolesCache, name) {
 		role.name = '!' + role.name;
 	}
 	return role;
+}
+
+export function getRandomMessage(client, guildId) {
+	let messages = client.settings.get(guildId, "messages")
+	let lastMessages = client.settings.get(guildId, "lastMessages")
+
+	let num = -1;
+	do {
+		num = _random(messages.length - 1);
+	} while(_indexOf(lastMessages, num) != -1 && messages.length > 1)
+	
+	if (lastMessages == undefined) {
+		lastMessages = [];
+	}
+	lastMessages.push(num);
+	client.settings.set(guildId, _takeRight(lastMessages, Math.ceil(messages.length * 0.3)), "lastMessages")
+	return messages[num];
 }

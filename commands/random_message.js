@@ -1,10 +1,10 @@
-import { getChannelFromMention } from "../util.js";
+import { getChannelFromMention, getRandomMessage } from "../util.js";
 
-export const name = 'direct_message';
-export const description = 'Sends a direct message as the bot in the specified channel.';
-export const args = 2;
-export const usage = '<channel> <message>';
-export const aliases = ['dm']
+export const name = 'random_message';
+export const description = 'Sends a random message as the bot in the specified channel.';
+export const args = 1;
+export const usage = '<channel>';
+export const aliases = ['srm']
 export async function execute(message, args) {
     const { client } = message;
 
@@ -13,7 +13,12 @@ export async function execute(message, args) {
         return await message.reply(`Couldn't find the supplied channel, make sure to mention it using a \`#\`.`)
     }
 
-    const msg = args.slice(1).join(' ');
+    const msg = getRandomMessage(client, message.guild.id);
+
+    if (!msg) {
+        return await message.reply(`No messages found.`);
+    }
+
     if (channel.viewable) {
         await channel.send(msg);
         await message.channel.send(`Posted in: ${channel}\n > ${msg}`);

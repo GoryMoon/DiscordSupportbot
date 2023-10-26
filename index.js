@@ -5,9 +5,7 @@ import { Client, Events, Collection, GatewayIntentBits, PermissionsBitField } fr
 import Enmap from 'enmap';
 import _includes from 'lodash.includes'
 import _random from 'lodash.random'
-import _indexOf from 'lodash.indexof'
-import _takeRight from 'lodash.takeright'
-
+import { getRandomMessage } from './util.js'
 
 import chalk from 'chalk';
 import moment from 'moment';
@@ -159,17 +157,7 @@ client.on(Events.MessageCreate, async msg => {
     if (_includes(guildConf.channels, msg.channel.id) && guildConf.messages.length > 0) {
         let message = checkSpecial(guildConf, msg);
         if (message === null) {
-            let num = -1;
-            do {
-                num = _random(guildConf.messages.length - 1);
-            } while(_indexOf(guildConf.lastMessages, num) != -1 && guildConf.messages.length > 1)
-            
-            if (guildConf.lastMessages == undefined) {
-                guildConf.lastMessages = [];
-            }
-            guildConf.lastMessages.push(num);
-            client.settings.set(msg.guild.id, _takeRight(guildConf.lastMessages, Math.ceil(guildConf.messages.length * 0.3)), "lastMessages")
-            message = guildConf.messages[num];
+            message = getRandomMessage(client, msg.guild.id);
         }
         await msg.channel.send(message);
     }
