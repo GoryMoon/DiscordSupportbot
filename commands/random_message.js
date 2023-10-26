@@ -1,3 +1,4 @@
+import { PermissionFlagsBits } from "discord.js";
 import { getChannelFromMention, getRandomMessage } from "../util.js";
 
 export const name = 'random_message';
@@ -20,8 +21,12 @@ export async function execute(message, args) {
     }
 
     if (channel.viewable) {
-        await channel.send(msg);
-        await message.channel.send(`Posted in: ${channel}\n > ${msg}`);
+        if (!channel.permissionsFor(message.guild.members.me).has(PermissionFlagsBits.SendMessages)) {
+            await message.reply(`Not allowed to send messages in: ${channel}, give me permission to send messages.`);
+        } else {
+            await channel.send(msg);
+            await message.channel.send(`Posted in: ${channel}\n > ${msg}`);
+        }
     } else {
         await message.reply(`Not allowed to send messages in: ${channel}, add me to that channel to send messages.`);
     }
